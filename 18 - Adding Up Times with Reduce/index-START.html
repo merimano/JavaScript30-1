@@ -182,6 +182,24 @@
     </li>
   </ul>
 <script>
+
+
+  const timeNodes = Array.from(document.querySelectorAll('[data-time]'));
+
+  //Använd map för att plocka ut time from dataset och lägga det i en array.
+  const seconds = timeNodes
+    .map(node => node.dataset.time)
+    .map(timeCode => {
+      const [mins, secs] = timeCode.split(' : ').map(parseFloat);
+      return (mins * 60) + secs;
+      console.log(mins, secs);
+    }).reduce((total, vidSeconds) => total + vidSeconds);
+
+  //gå igenom varje item i arrayen. 
+  //För varje nummer ta fram hur många sekunder varje siffra är
+  //Lägg samman det till en total. 
+
+
 </script>
 </body>
 </html>
