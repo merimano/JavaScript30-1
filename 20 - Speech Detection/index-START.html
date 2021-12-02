@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Speech Detection</title>
+  <link rel="shortcut icon" href="#">
 </head>
 <body>
 
@@ -10,11 +11,48 @@
   </div>
 
 <script>
+  //speech recognition
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  //skapa en ny instance and röstigenkänning
+  const recognition = new SpeechRecognition();
+  //fattar inte denna
+  recognition.interimResults = true;
 
+  //skapa en ny paragrafenhet
+  let p = document.createElement('p');
+  //välj klassen words i DOMen
+  const words = document.querySelector('.words');
+  //addera en paragrafenhet i klassen words i DOMen
+  words.appendChild(p);
+
+  //lyssna på resultat event från röstigenkännaren
+  recognition.addEventListener('result', e => {
+    //omvandla resultat till en Array
+    const transcript = Array.from(e.results)
+    //välj plats 0 i resultat-arrayen
+      .map(result => result[0])
+      //välj transcript från plats 0 i resultat arrayen.
+      .map(result => result.transcript)
+      //slå samman alla resultat transcript arrays till en array.
+      .join('')
+
+      //tilldela paragrafens textinnehåll samma innehål som transpript
+      p.textContent = transcript;
+      //Kolla om resultatet är final, om ja, skapa en ny paragrafenhet och placera den i DOMen
+      if(e.results[0].isFinal) {
+        p = document.createElement('p');
+        words.appendChild(p);
+      }
+
+    console.log(transcript);
+  });
+
+// Lyssna efter eventet end, om det är det sista, så starta om röstigenkännaren.
+  recognition.addEventListener('end', recognition.start);
+
+  recognition.start();
 
 </script>
-
 
   <style>
     html {
