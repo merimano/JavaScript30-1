@@ -187,17 +187,28 @@
   const timeNodes = Array.from(document.querySelectorAll('[data-time]'));
 
   //Använd map för att plocka ut time from dataset och lägga det i en array.
+  //Skapa en variabel
   const seconds = timeNodes
+  // Gå igenom Arrayen timenodes och hämta värdet time från var enhets timeset
     .map(node => node.dataset.time)
+    // för varje time-värde, dela upp siffran (som är en string) i minuter och sekunder, och gör det till en float.
     .map(timeCode => {
       const [mins, secs] = timeCode.split(' : ').map(parseFloat);
+      // gör muniterna till sekunder och lägg samman med sekunder,
       return (mins * 60) + secs;
       console.log(mins, secs);
+      //gå igenom varje värde och addera det till totalen av antalet secunder.
     }).reduce((total, vidSeconds) => total + vidSeconds);
 
-  //gå igenom varje item i arrayen. 
-  //För varje nummer ta fram hur många sekunder varje siffra är
-  //Lägg samman det till en total. 
+  //Skapa en ny array som omvändlar antalet sekunder till timmmar, minuter, sekunder.
+
+  let secondsLeft = seconds;
+  const hours = Math.floor(secondsLeft / 3600); //ger antalet hela timmar
+  secondsLeft = (secondsLeft % 3600); //ger antalet sekunder kvar efter timmar är bortdragna.
+  const minutes = Math.floor(secondsLeft / 60); //ger antalet minuter.
+  const seconds = (secondsLeft % 60); //ger antalet sekunder kvar efter att timmar och minuter är bortdragna.
+
+
 
 
 </script>
