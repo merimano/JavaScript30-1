@@ -55,6 +55,30 @@
 
 <script>
 
+// Välj navbaren
+// Placera en eventlistener på fönstret, lyssna på scrollpositionen.
+// Öppna stickyNav functionen.
+
+// Ta reda på navbarens tops position på sidan.
+// Kolla när fönstrets scrollY matchar navbarens topPosition.
+// Om den matchar navbarens topPosition, addera klassen navfixed, annars ta nort den klassen.
+
+const nav = document.querySelector('#main');
+
+function stickyNav(e) {
+  const navTop = nav.offsetTop;
+  if(window.scrollY >= navTop) {
+    document.body.classList.paddingTop = nav.offsetHeight + 'px';
+    document.body.classList.add('fixed-nav');
+  }else{
+    document.body.classList.paddingTop = 0;
+    document.body.classList.remove('fixed-nav');
+  }
+  console.log(navTop, window.scrollY);
+}
+
+window.addEventListener('scroll', stickyNav);
+
 </script>
 
 </body>
