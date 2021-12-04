@@ -26,7 +26,34 @@
     </div>
 
   <script>
-    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+    // 
+// Välj alla länkar
+    const triggers = document.querySelectorAll('a');
+    //Skapa ett nytt highlight element i DOMen.
+    const highlight = document.createElement('span');
+    //Addera klassen highlight till elementet highlight.
+    highlight.classList.add('highlight');
+    //Appenda elementen highlight i DOM'en.
+    document.body.append(highlight);
+
+    function highLightLink() {
+      //ta fram länkens spec genom getBoundingCLientRect.
+      const linkCoords = this.getBoundingClientRect();
+      //ta fram detaljerna för länken.
+      const coords = {
+        width: linkCoords.width,
+        height: linkCoords.height,
+        top: linkCoords.top + window.scrollY,
+        left: linkCoords.left + window.scrollX
+      }
+      //Modifiera klassen highlight enligt nedan:
+      highlight.style.width = `${coords.width}px`;
+      highlight.style.height = `${coords.height}px`;
+      highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`;
+    }
+// Lyssna på alla länkar, när en mus sveper över länken, reagera genom att aktivera funktionen highLight Link.
+    triggers.forEach(a => a.addEventListener('mouseenter', highLightLink));
+
   </script>
 </body>
 </html>
