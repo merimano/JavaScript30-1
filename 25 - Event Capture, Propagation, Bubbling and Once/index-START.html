@@ -43,6 +43,15 @@
 <button></button>
 <script>
 
+const divs = document.querySelectorAll('div');
+
+function action(e) {
+  // e.stopPropagation(); //stop bubbling. Hinders the triggering of events all the way up to the top of the document. The browser works in a way where if clicking an element it ripples down, triggering clicks on all elements from the top and down.
+  console.log(this);
+}
+
+divs.forEach(div => div.addEventListener('click', action, {capture: false}));
+
 </script>
 </body>
 </html>
